@@ -19,6 +19,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'jwt'
 gem 'has_friendship'
 gem 'active_model_serializers', '~> 0.10.0'
+gem 'dotenv-rails'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

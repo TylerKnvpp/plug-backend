@@ -11,10 +11,10 @@ class UsersController < ApplicationController
     end
     
     def create
-       user = User.create(user_params)
+       user = User.create(sign_up_params)
        token = JWT.encode({user_id: user.id}, ENV['JWT_TOKEN']) if user
        if (user.valid?)
-        render json: {token: token, username: user.username, id: user.id }  
+        render json: {token: token, username: user.username, id: user.id}  
        else
         render :json => { :errors => user.errors.full_messages, :code => 69 }
        end
@@ -28,6 +28,10 @@ class UsersController < ApplicationController
 
 
     private
+
+    def sign_up_params
+        params.require(:user).permit(:full_name, :username, :password)
+    end
 
     def user_params
         params.require(:user).permit(:email, :full_name, :username, :password, :age, :city, :occupation, :company, :school)

@@ -22,7 +22,6 @@ class PlansController < ApplicationController
     end
     
 
-
     private
 
     def plan_params
