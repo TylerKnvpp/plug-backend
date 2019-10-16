@@ -4,5 +4,6 @@ class User < ApplicationRecord
 
   validates :username, uniqueness: true 
 
+  has_friendship
   has_secure_password
 end
