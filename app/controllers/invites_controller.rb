@@ -18,7 +18,12 @@ class InvitesController < ApplicationController
 
     def create
         invite = Invite.create(invite_params)
-        render json: invite
+        # render json: invite
+        if (invite.valid?)
+        render json: {invite: invite}  
+       else
+        render :json => { :errors => invite.errors.full_messages, :code => 69 }
+       end
     end
     
 
@@ -26,7 +31,7 @@ class InvitesController < ApplicationController
     private
 
     def invite_params
-        params.require(:invite).permit()
+        params.require(:invite).permit(:user_id, :category, :location, :time, :details)
     end
 
 end
