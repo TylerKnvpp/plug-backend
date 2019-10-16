@@ -1,23 +1,23 @@
 class FriendsController < ApplicationController
 
     def index
-
         user = User.find(params[:user_id])
         users_friends = user.friends
         users_requests = user.pending_friends
         users_sent_requests = user.requested_friends
         users_blocked_accounts = user.blocked_friends
-        render json: { user: user, friends: users_friends, pending_received: users_requests, pending_requests: users_sent_requests, blocked: users_blocked_accounts}
+        render json: { user: user, friends: users_friends, pending_requests: users_requests, pending_received: users_sent_requests, blocked: users_blocked_accounts}
     end
 
-    def friend_request
-        user_sent_friend_request = User.find(params[:id])
-        user_received_friend_request = User.find(params[:username])
+    def create
+        
+        user_sent_friend_request = User.find(params[:friend][:sender])
+        user_received_friend_request = User.find(params[:friend][:receiver])
         user_sent_friend_request.friend_request(user_received_friend_request)
         if user_sent_friend_request.friend_request(user_received_friend_request)
             render json: {message: "#{user_received_friend_request} received your friend request!"}
         else
-            render json: {message: "Oops! Something went wrong."}
+            render json: {message: "Oops! Something went wrong.", code: 69}
         end
     end
 
