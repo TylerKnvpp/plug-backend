@@ -6,6 +6,7 @@ class UsersController < ApplicationController
     end
 
      def show
+
         user = User.find(params[:id])
         render json: user
     end
@@ -13,7 +14,7 @@ class UsersController < ApplicationController
     def create
        user = User.create(sign_up_params)
        token = JWT.encode({user_id: user.id}, ENV['JWT_TOKEN']) if user
-       if (user.valid?)
+       if ( user.valid?)
         render json: {token: token, username: user.username, id: user.id}  
        else
         render :json => { :errors => user.errors.full_messages, :code => 69 }
@@ -28,6 +29,8 @@ class UsersController < ApplicationController
 
 
     private
+
+
 
     def sign_up_params
         params.require(:user).permit(:full_name, :username, :password)

@@ -22,9 +22,10 @@ class FriendsController < ApplicationController
     end
 
     def accept_friend_request
-        user_sent_friend_request = User.find(params[:id])
-        user_received_friend_request = User.find(params[:id])
-        user_sent_friend_request.accept_request(user_received_friend_request)
+        user_received_friend_request = User.find(params[:user_id])
+        user_sent_friend_request = User.find(params[:friend_id])
+        byebug
+        user_received_friend_request.accept_request(user_sent_friend_request)
         if user_sent_friend_request.accept_request(user_received_friend_request)
             render json: {message: "#{user_received_friend_request} is now your friend!"}
         else
@@ -33,8 +34,9 @@ class FriendsController < ApplicationController
     end
 
     def decline_friend_request
-        user_sent_friend_request = User.find(params[:id])
-        user_received_friend_request = User.find(params[:id])
+
+        user_sent_friend_request = User.find(params[:user_id])
+        user_received_friend_request = User.find(params[:friend])
         user_sent_friend_request.decline_request(user_received_friend_request)
         if user_sent_friend_request.decline_request(user_received_friend_request)
             render json: {message: "#{user_received_friend_request} said 'nah.'"}
