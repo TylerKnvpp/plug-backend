@@ -22,12 +22,11 @@ class FriendsController < ApplicationController
     end
 
     def accept_friend_request
-        user_received_friend_request = User.find(params[:user_id])
-        user_sent_friend_request = User.find(params[:friend_id])
-        byebug
-        user_received_friend_request.accept_request(user_sent_friend_request)
-        if user_sent_friend_request.accept_request(user_received_friend_request)
-            render json: {message: "#{user_received_friend_request} is now your friend!"}
+        user = User.find(params[:user_id])
+        requester = User.find(params[:friend_id])
+        user.accept_request(requester)
+        if user.accept_request(requester)
+            render json: {message: "#{user} is now your friend!"}
         else
             render json: {message: "Oops! Something went wrong."}
         end
