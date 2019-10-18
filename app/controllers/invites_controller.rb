@@ -18,7 +18,8 @@ class InvitesController < ApplicationController
 
     def create
         invite = Invite.create(invite_params)
-        # render json: invite
+
+        params[:invitedUsers].each{|user| Plan.create({user_id: user, invite_id: invite.id})}
         if (invite.valid?)
         render json: {invite: invite}  
        else
@@ -33,5 +34,9 @@ class InvitesController < ApplicationController
     def invite_params
         params.require(:invite).permit(:user_id, :category, :location, :time, :details)
     end
+
+    # def plans_params
+    #     params.require(:invite).permit(:invitedUsers)
+    # end
 
 end
