@@ -1,24 +1,3 @@
-# README
+1. add params / column to db? for an array of invited_users
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+2. In invite#create controller action, create a method that loops through invited_users array then creates a Plan for each with the invite.id + user_id
