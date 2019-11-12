@@ -27,12 +27,23 @@ class InvitesController < ApplicationController
        end
     end
     
+    def invited_users
+        invite = Invite.find(params[:invite_id])
+        users = invite.invited_users
+        usersArray = users.split(',')
+        invited = []
+        usersArray.each do |user|
+           user = User.find(user)
+           invited.push(user)
+        end
 
+        render json: {invited_users: invited}
+    end
 
     private
 
     def invite_params
-        params.require(:invite).permit(:user_id, :category, :location, :time, :details)
+        params.require(:invite).permit(:user_id, :category, :location, :time, :details, :invited_users)
     end
 
     # def plans_params
