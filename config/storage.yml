@@ -8,8 +8,8 @@ local:
 
 amazon:
   service: S3
-  access_key_id: "AKIAJPNEXSREAHKZIJHA"
-  secret_access_key: "h4GO7sID/HSrapIPJjRXgUNM4T4dTwLVUcNhYeba"
+  access_key_id: ""
+  secret_access_key: ""
   bucket: ""
   region: "" # e.g. 'us-east-1'
 
